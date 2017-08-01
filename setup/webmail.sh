@@ -80,7 +80,12 @@ if [ $needs_update == 1 ]; then
 		https://github.com/blind-coder/rcmcarddav/releases/download/v${CARDDAV_VERSION}/carddav-${CARDDAV_VERSION}.zip \
 		$CARDDAV_HASH \
 		/tmp/carddav.zip
-
+        
+    # install mobile skin
+    git clone https://github.com/messagerie-melanie2/Roundcube-Skin-Melanie2-Larry-Mobile.git ${RCM_DIR}/skins/melanie2_larry_mobile
+    git clone https://github.com/messagerie-melanie2/roundcube_mobile.git ${RCM_DIR}/plugins/mobile
+    git clone https://github.com/messagerie-melanie2/roundcube_jquery_mobile.git ${RCM_DIR}/plugins/jquery_mobile
+    
 	# unzip and cleanup
 	unzip -q /tmp/carddav.zip -d ${RCM_PLUGIN_DIR}
 	rm -f /tmp/carddav.zip
@@ -130,7 +135,7 @@ cat > $RCM_CONFIG <<EOF;
 \$config['support_url'] = 'https://mailinabox.email/';
 \$config['product_name'] = '$PRIMARY_HOSTNAME Webmail';
 \$config['des_key'] = '$SECRET_KEY';
-\$config['plugins'] = array('html5_notifier', 'archive', 'zipdownload', 'password', 'managesieve', 'jqueryui', 'persistent_login', 'carddav');
+\$config['plugins'] = array('html5_notifier', 'archive', 'zipdownload', 'password', 'managesieve', 'jqueryui', 'persistent_login', 'carddav', 'mobile');
 \$config['skin'] = 'larry';
 \$config['login_autocomplete'] = 2;
 \$config['password_charset'] = 'UTF-8';
